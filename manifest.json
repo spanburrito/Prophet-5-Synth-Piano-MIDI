@@ -1,9 +1,9 @@
 {
-  "name": "Prophet-5 Piano Sim MIDI",
-  "short_name": "P5 DAW",
+  "name": "P5 Synth Piano MIDI",
+  "short_name": "P5 Synth Piano MIDI",
   "description": "A Prophet-5 synthesizer simulator with MIDI piano roll DAW",
-  "start_url": "/Prophet-5-Synth-Piano-MIDI/",
-  "scope": "/Prophet-5-Synth-Piano-MIDI/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#1a1a1a",
   "theme_color": "#c8b89a",
@@ -13,25 +13,13 @@
       "src": "icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     },
     {
       "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ]
 }
