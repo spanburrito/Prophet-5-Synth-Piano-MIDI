@@ -2,6 +2,7 @@
   "name": "P5 Synth Piano MIDI",
   "short_name": "P5 Synth Piano MIDI",
   "description": "A Prophet-5 synthesizer simulator with MIDI piano roll DAW",
+  "version": "1.0.2",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
