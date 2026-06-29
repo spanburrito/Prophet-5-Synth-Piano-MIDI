@@ -1205,7 +1205,7 @@ document.addEventListener('keydown',ev=>{
   if((k==='delete'||k==='backspace')&&selectedDynIdxs.length){const tr=getCurTrack();if(tr.dynMarkings){pushUndo();[...selectedDynIdxs].sort((a,b)=>b-a).forEach(i=>tr.dynMarkings.splice(i,1));selectedDynIdxs=[];redrawAll();}return;}
   if((k==='delete'||k==='backspace')&&selectedHairIdxs.length){const tr=getCurTrack();if(tr.hairpins){pushUndo();[...selectedHairIdxs].sort((a,b)=>b-a).forEach(i=>tr.hairpins.splice(i,1));selectedHairIdxs=[];drawDynMarkings();}return;}
   if((k==='delete'||k==='backspace')&&selectedPedalIdx>=0){const tr=getCurTrack();if(tr.pedals&&tr.pedals[selectedPedalIdx]){pushUndo();tr.pedals.splice(selectedPedalIdx,1);selectedPedalIdx=-1;drawPedals();}return;}
-  if(ev.key==='0'&&isStepMode()&&curTool==='draw'){ev.preventDefault();stepCursor=Math.min(stepCursor+stepLen(),totalBeats-stepLen());updateStepCursor();return;}
+  if(ev.key==='0'&&isStepMode()&&curTool==='draw'){ev.preventDefault();stepCursor+=stepLen();expandIfNeeded(stepCursor);updateStepCursor();return;}
   if(ev.repeat)return;
   const KB_W={a:'C',s:'D',d:'E',f:'F',g:'G',h:'A',j:'B',k:'C'};const KB_B={w:'C#',e:'D#',t:'F#',y:'G#',u:'A#'};const note=KB_W[k]||KB_B[k];if(!note)return;ev.preventDefault();
   const oct=ev.shiftKey?5:4,midi=(oct+1)*12+NM[note];if(kbHeld.has(midi))return;kbHeld.add(midi);
@@ -1325,7 +1325,7 @@ function connectIn(){
       if(inSynth&&loopRecording){loopNoteOff(d1);}
       else if(inRoll&&curTool==='draw'&&isStepMode())releaseStepNote(d1);
       else{noteOff(d1,sustainPedalHeld);if(!sustainPedalHeld&&isFreeRecording)freeRecEnd(d1);}
-    }else if(cmd===0xb0){if(d1===64){const wasHeld=sustainPedalHeld;sustainPedalHeld=d2>=64;if(sustainPedalHeld&&!wasHeld){if(inSynth){ensureACForDraw();toggleLoopRecord();}else if(inRoll&&curTool==='draw'&&isStepMode()){stepCursor=Math.min(stepCursor+stepLen(),totalBeats-stepLen());updateStepCursor();}}}else if(d1===1)modWheel=d2/127;}
+    }else if(cmd===0xb0){if(d1===64){const wasHeld=sustainPedalHeld;sustainPedalHeld=d2>=64;if(sustainPedalHeld&&!wasHeld){if(inSynth){ensureACForDraw();toggleLoopRecord();}else if(inRoll&&curTool==='draw'&&isStepMode()){stepCursor+=stepLen();expandIfNeeded(stepCursor);updateStepCursor();}}}else if(d1===1)modWheel=d2/127;}
     else if(cmd===0xe0)pitchBend=((d2<<7)|d1)-8192;
     else if(cmd===0xd0)aftertouch=d1/127;
   };
